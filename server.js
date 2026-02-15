@@ -70,7 +70,7 @@ const movies = [
 // Rutas
 
 // GET - Obtener todas las películas
-app.get('/api/movies', (req, res) => {
+app.get('/movies', (req, res) => {
   try {
     res.json(movies);
   } catch (error) {
@@ -79,7 +79,7 @@ app.get('/api/movies', (req, res) => {
 });
 
 // GET - Obtener una película por ID
-app.get('/api/movies/:id', (req, res) => {
+app.get('/movies/:id', (req, res) => {
   try {
     const movie = movies.find(m => m.id === parseInt(req.params.id));
     
@@ -94,7 +94,7 @@ app.get('/api/movies/:id', (req, res) => {
 });
 
 // POST - Crear una nueva película
-app.post('/api/movies', (req, res) => {
+app.post('/movies', (req, res) => {
   try {
     const { title, year, director, rating, description, poster } = req.body;
     
@@ -121,7 +121,7 @@ app.post('/api/movies', (req, res) => {
 });
 
 // PUT - Actualizar una película
-app.put('/api/movies/:id', (req, res) => {
+app.put('/movies/:id', (req, res) => {
   try {
     const movie = movies.find(m => m.id === parseInt(req.params.id));
     
@@ -145,7 +145,7 @@ app.put('/api/movies/:id', (req, res) => {
 });
 
 // DELETE - Eliminar una película
-app.delete('/api/movies/:id', (req, res) => {
+app.delete('/movies/:id', (req, res) => {
   try {
     const index = movies.findIndex(m => m.id === parseInt(req.params.id));
     
@@ -170,10 +170,8 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor ejecutándose en puerto ${PORT}`);
-  console.log(`📡 API disponible en http://localhost:${PORT}/api/movies`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Servidor ejecutándose en el puerto ${PORT}`);
 });
 
 module.exports = app;
